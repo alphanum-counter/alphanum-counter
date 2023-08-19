@@ -8,6 +8,7 @@ class AlphanumCounter(object):
     
     def __init__(self, start=None, alpha_pos=1, max_num=1000):
         """
+        :params start: custom start value
         :param alpha_num: number of alphabet positions in the beginning.
         :param max_num: maximum count until numbers are increased.
         """
