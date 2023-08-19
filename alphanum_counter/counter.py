@@ -42,18 +42,21 @@ class AlphanumCounter(object):
 
         self._current = f"{alpha}{num}"
 
-    def _split_alpha_num(self, num) -> Tuple:
+    def _split_alpha_num(self, num: str) -> Tuple:
+        if not isinstance(num, str):
+            raise IncorrectFormatException(num)
+
         splits = re.findall(r"[^\W\d_]+|\d+", num)
 
         if len(splits) != 2:
-            raise IncorrectFormatException(self._current)
+            raise IncorrectFormatException(num)
         elif not splits[0].isalpha():
-            raise IncorrectFormatException(self._current)
+            raise IncorrectFormatException(num)
         else:
             try:
                 int(splits[1])
             except Exception:
-                raise IncorrectFormatException(self._current)
+                raise IncorrectFormatException(num)
 
         return splits[0], splits[1]
 
