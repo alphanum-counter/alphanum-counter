@@ -1,5 +1,6 @@
 import pytest
-from alphanum_counter.counter import AlphanumCounter, IncorrectFormatException
+from alphanum_counter.counter import AlphanumCounter
+from alphanum_counter.exceptions import UnsupportedException, IncorrectFormatException
 
 def test_counter_1():
     counter = AlphanumCounter()
@@ -22,3 +23,8 @@ def test_counter_3():
 
     with pytest.raises(IncorrectFormatException):
         AlphanumCounter(start=1)
+
+
+def test_counter_4():
+    with pytest.raises(UnsupportedException):
+        AlphanumCounter(alpha_pos=2)

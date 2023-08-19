@@ -1,11 +1,8 @@
 import re
 from typing import Tuple
 
+from alphanum_counter.exceptions import IncorrectFormatException, UnsupportedException
 
-class IncorrectFormatException(Exception):
-    def __init__(self, value) -> None:
-        self.message = f"Incorrect value: {value}"
-        super().__init__()
 
 class AlphanumCounter(object):
     
@@ -14,6 +11,9 @@ class AlphanumCounter(object):
         :param alpha_num: number of alphabet positions in the beginning.
         :param max_num: maximum count until numbers are increased.
         """
+        if alpha_pos != 1:
+            raise UnsupportedException("Only one alphabet position supported.")
+
         assert isinstance(alpha_pos, int)
         self._alpha_pos = alpha_pos
         assert isinstance(max_num, int)
