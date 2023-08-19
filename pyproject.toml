@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "alphanum-counter"
+version = "0.1.0"
+description = "Alphanumeric counter"
+authors = ["Haridas Kandath <haridas124@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "alphanum_counter"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pre-commit = "^3.3.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
