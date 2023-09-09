@@ -1,14 +1,17 @@
+from __future__ import annotations
+
 import re
 from typing import Tuple
 
-from alphanum_counter.exceptions import IncorrectFormatException, UnsupportedException
+from alphanum_counter.exceptions import IncorrectFormatException
+from alphanum_counter.exceptions import UnsupportedException
 
 
 class AlphanumCounter(object):
     """
     A simple alphanumeric counter.
     """
-    
+
     def __init__(self, start=None, alpha_pos=1, max_num=1000):
         """
         :params start: custom start value
@@ -35,7 +38,7 @@ class AlphanumCounter(object):
         else:
             alpha, num = self._split_alpha_num(start)
             self._current = f"{alpha}{self._format_num(num)}"
-        
+
         self._started = True
 
     def current(self) -> str:
@@ -73,7 +76,7 @@ class AlphanumCounter(object):
         return splits[0], splits[1]
 
     def _next_alpha(self, alpha):
-        return chr((ord(alpha.upper())+1 - 65) % 26 + 65)        
+        return chr((ord(alpha.upper()) + 1 - 65) % 26 + 65)
 
     def _reset_num(self, num) -> str:
         return self._format_num("1")
@@ -92,9 +95,9 @@ class AlphanumCounter(object):
         else:
             self._prev = self._current
             self._increase_counter()
-        
+
         return self._current
-    
+
     def prev(self) -> str:
         """
         Returns the previous number

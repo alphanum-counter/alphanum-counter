@@ -1,7 +1,7 @@
 
 # alphanum-counter
 
-A simple library to get alphanumeric numbers in order 
+A simple library to get alphanumeric numbers in order
 
     A0001, A0002, ..., A1000, B0001, ...
 
