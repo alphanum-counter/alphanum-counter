@@ -21,8 +21,12 @@ class AlphanumCounter(object):
         assert isinstance(alpha_pos, int)
         self._alpha_pos = alpha_pos
         assert isinstance(max_num, int)
-        self._max_num=max_num
+        self._max_num = max_num
+        self._start = start
+        self._started = False
         self._set_start(start)
+        self._prev = None
+
         super(AlphanumCounter, self).__init__()
 
     def _set_start(self, start) -> str:
@@ -31,6 +35,8 @@ class AlphanumCounter(object):
         else:
             alpha, num = self._split_alpha_num(start)
             self._current = f"{alpha}{self._format_num(num)}"
+        
+        self._started = True
 
     def current(self) -> str:
         """
@@ -49,15 +55,14 @@ class AlphanumCounter(object):
 
         self._current = f"{alpha}{num}"
 
-    def _split_alpha_num(self, num: str) -> Tuple:
+    def _split_alpha_num(self, num: str) -> Tuple[str, str]:
         if not isinstance(num, str):
             raise IncorrectFormatException(num)
 
         splits = re.findall(r"[^\W\d_]+|\d+", num)
 
-        if len(splits) != 2:
-            raise IncorrectFormatException(num)
-        elif not splits[0].isalpha():
+        # if there aren't two parts or the first part is not alphabetic
+        if len(splits) != 2 or not splits[0].isalpha():
             raise IncorrectFormatException(num)
         else:
             try:
@@ -82,5 +87,16 @@ class AlphanumCounter(object):
         """
         Returns the next counter number
         """
-        self._increase_counter()
+        if not self._started:  # counter not started
+            self._set_start(self._start)
+        else:
+            self._prev = self._current
+            self._increase_counter()
+        
         return self._current
+    
+    def prev(self) -> str:
+        """
+        Returns the previous number
+        """
+        return self._prev
