@@ -5,6 +5,9 @@ from alphanum_counter.exceptions import IncorrectFormatException, UnsupportedExc
 
 
 class AlphanumCounter(object):
+    """
+    A simple alphanumeric counter.
+    """
     
     def __init__(self, start=None, alpha_pos=1, max_num=1000):
         """
@@ -30,6 +33,9 @@ class AlphanumCounter(object):
             self._current = f"{alpha}{self._format_num(num)}"
 
     def current(self) -> str:
+        """
+        Returns the current counter number
+        """
         return self._current
 
     def _increase_counter(self):
@@ -73,5 +79,8 @@ class AlphanumCounter(object):
         return f"{(max_count_len - length)* '0'}{num}"
 
     def next(self) -> str:
+        """
+        Returns the next counter number
+        """
         self._increase_counter()
         return self._current
