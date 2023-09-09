@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+
 class IncorrectFormatException(Exception):
     def __init__(self, value) -> None:
         self.message = f"Incorrect value: {value}"
